@@ -50,15 +50,21 @@ body {
   border-radius: 2em;
   border: 1px solid rgb(141, 141, 141);
 }
+.todo-list{
+  max-width: 600px;
+  margin: 0 auto;
+}
+@media (min-width: 600px) {
+  .todo-list{
+    border-radius: 50px;
+    overflow: hidden;
+  }
+}
 .todo-preview {
   cursor: pointer;
   width: 100%;
   background-color: rgb(224, 224, 224);
   padding: 20px;
-}
-.todo-list{
-  max-width: 600px;
-  margin: 0 auto;
 }
 .todo-preview:nth-of-type(2n) {
   background-color: rgb(238, 238, 238);
