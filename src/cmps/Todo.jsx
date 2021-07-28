@@ -1,22 +1,34 @@
 import { useEffect, useState } from "react";
 import { API } from 'aws-amplify';
-import { listTodos } from '../graphql/queries';
+import { listTodos, getTodo } from '../graphql/queries';
 import { updateTodo as updateTodoMutation, createTodo as createTodoMutation, deleteTodo as deleteTodoMutation } from '../graphql/mutations';
 import { TodoList } from "./TodoList";
 import { TodoEdit } from "./TodoEdit";
+import { userService } from "../services/userService";
 
 
 export function Todo() {
 
     const [todos, setTodos] = useState([])
+    const [username, setUsername] = useState('')
     const [todoToEdit, setTodoToEdit] = useState(null)
 
     useEffect(() => {
-        fetchTodos()
+        const username = userService.getUsername()
+        if (!username) return
+        setUsername(username)
     }, [])
 
+    useEffect(() => {
+        if (!username) return
+        fetchTodos()
+        setUsername(username)
+    }, [username])
+
     const fetchTodos = async () => {
-        const apiData = await API.graphql({ query: listTodos });
+        const apiData = await API.graphql({
+            query: listTodos, variables: { filter: { username: { eq: username } }}
+        });
         setTodos(apiData.data.listTodos.items);
     }
 
@@ -27,8 +39,9 @@ export function Todo() {
     }
 
     const createTodo = async (data) => {
-        if (!data.name || !data.description) return;
+        if (!data.name || !data.description || !username) return;
         try {
+            data.username = username
             await API.graphql({ query: createTodoMutation, variables: { input: data } });
             setTodos([...todos, data]);
         } catch (e) {
