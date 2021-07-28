@@ -1,11 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
+import './main.css';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
+import { Todo } from './cmps/Todo';
 
 function App() {
   return (
     <div className="App">
-      <section className="auth">
+      <section className="main-container">
+        <Todo/>
         <AmplifySignOut />
       </section>
     </div>

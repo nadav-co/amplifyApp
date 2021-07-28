@@ -1,0 +1,72 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+.App {
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+    "Helvetica Neue", sans-serif;
+}
+
+.main-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.todos-container {
+  flex: 1;
+}
+
+.hydrated {
+  justify-self: flex-end;
+}
+
+.todo-edit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  margin: 40px auto;
+}
+
+.todo-edit > input {
+  margin: 10px 0;
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 1em;
+  border-radius: 2em;
+  border: 1px solid rgb(141, 141, 141);
+}
+.todo-preview {
+  max-width: 600px;
+  background-color: rgb(224, 224, 224);
+  padding: 20px;
+}
+.todo-preview:nth-of-type(2n) {
+  background-color: rgb(238, 238, 238);
+}
+
+button {
+  margin: 0;
+  width: fit-content;
+  border: 0;
+  padding: 10px 15px;
+  background-color: rgb(255 153 0);
+  color: white;
+  font-size: 1em;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  border-radius: 2em;
+  align-self: flex-start;
+}
+.button-container{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+input, button{
+  outline: none;
+}
