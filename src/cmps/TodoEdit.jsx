@@ -27,7 +27,7 @@ export function TodoEdit({ saveTodo, todoToEdit }) {
                 value={formData.description}
             />
             <section className="button-container">
-                <button onClick={onSaveTodo}>Create Todo</button>
+                <button onClick={onSaveTodo}>Save Todo</button>
                 {(formData.name || formData.description) &&
                     <button onClick={() => setFormData(initialFormState)}>Cancel</button>}
             </section>

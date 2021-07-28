@@ -57,7 +57,7 @@ export function Todo() {
 
     return (
         <main className="todos-container">
-            <h1>Todos</h1>
+            <h1 className="title">Todos</h1>
             <TodoEdit todoToEdit={todoToEdit} saveTodo={saveTodo} />
             <TodoList todos={todos} deleteTodo={deleteTodo} edit={setTodoToEdit} />
         </main>

@@ -25,11 +25,21 @@ body {
 }
 
 .todo-edit {
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   margin: 40px auto;
+}
+.title{
+  margin: 0;
+  padding: 20px;
+  background-color: rgb(255 153 0);
+  color: white;
+  letter-spacing: 0.1em;
+
 }
 
 .todo-edit > input {
@@ -41,9 +51,14 @@ body {
   border: 1px solid rgb(141, 141, 141);
 }
 .todo-preview {
-  max-width: 600px;
+  cursor: pointer;
+  width: 100%;
   background-color: rgb(224, 224, 224);
   padding: 20px;
+}
+.todo-list{
+  max-width: 600px;
+  margin: 0 auto;
 }
 .todo-preview:nth-of-type(2n) {
   background-color: rgb(238, 238, 238);
