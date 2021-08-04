@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { API } from 'aws-amplify';
-import { listTodos, getTodo } from '../graphql/queries';
+import { listTodos } from '../graphql/queries';
 import { updateTodo as updateTodoMutation, createTodo as createTodoMutation, deleteTodo as deleteTodoMutation } from '../graphql/mutations';
 import { TodoList } from "./TodoList";
 import { TodoEdit } from "./TodoEdit";
 import { userService } from "../services/userService";
+import { useQuery } from "@apollo/client";
+
 
 
 export function Todo() {
@@ -12,6 +14,8 @@ export function Todo() {
     const [todos, setTodos] = useState([])
     const [username, setUsername] = useState('')
     const [todoToEdit, setTodoToEdit] = useState(null)
+
+    const { isLoading, error, queryTodos } = useQuery(listTodos);
 
     useEffect(() => {
         const username = userService.getUsername()
@@ -24,6 +28,12 @@ export function Todo() {
         fetchTodos()
         setUsername(username)
     }, [username])
+
+    useEffect(() => {
+        // setTodos(queryTodos)
+        console.log(queryTodos);
+        console.log(error);
+    }, [queryTodos])
 
     const fetchTodos = async () => {
         const apiData = await API.graphql({
@@ -50,7 +60,6 @@ export function Todo() {
     }
 
     const updateTodo = async (data) => {
-
         delete data.createdAt
         delete data.updatedAt
 
@@ -72,7 +81,12 @@ export function Todo() {
         <main className="todos-container">
             <h1 className="title">Todos</h1>
             <TodoEdit todoToEdit={todoToEdit} saveTodo={saveTodo} />
-            <TodoList todos={todos} deleteTodo={deleteTodo} edit={setTodoToEdit} />
+            {isLoading ?
+                <h3>Loading</h3> :
+                error ?
+                    <h3>error</h3> :
+                    <TodoList todos={todos} deleteTodo={deleteTodo} edit={setTodoToEdit} />
+            }
         </main>
     )
 }

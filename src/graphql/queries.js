@@ -1,6 +1,8 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+import { gql } from "@apollo/client";
+
 export const getTodo = /* GraphQL */ `
   query GetTodo($id: ID!) {
     getTodo(id: $id) {
@@ -13,7 +15,7 @@ export const getTodo = /* GraphQL */ `
     }
   }
 `;
-export const listTodos = /* GraphQL */ `
+export const listTodos = /* GraphQL */ gql`
   query ListTodos(
     $filter: ModelTodoFilterInput
     $limit: Int
